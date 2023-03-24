@@ -1,0 +1,6 @@
+bitsandbytes
+accelerate
+transformers
+diffusers
+pynvml
+websockets

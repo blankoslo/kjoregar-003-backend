@@ -1,2 +1,4 @@
-# kjoregar-003-backend
-Kode som ble kjørt i demoer
+# ai-ws
+
+Warning: Code only for proof of concept and demo purposes.
+https://www.blank.no/events
