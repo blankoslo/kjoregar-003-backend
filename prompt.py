@@ -3,11 +3,11 @@ from transformers import AutoModelForSeq2SeqLM, AutoTokenizer, AutoModelForCausa
 model = AutoModelForSeq2SeqLM.from_pretrained("snrspeaks/t5-one-line-summary")
 tokenizer = AutoTokenizer.from_pretrained("snrspeaks/t5-one-line-summary")
 
-magicTokenizer = AutoTokenizer.from_pretrained(
-    "Gustavosta/MagicPrompt-Stable-Diffusion")
+#magicTokenizer = AutoTokenizer.from_pretrained(
+#    "Gustavosta/MagicPrompt-Stable-Diffusion")
 
-magicModel = AutoModelForCausalLM.from_pretrained(
-    "Gustavosta/MagicPrompt-Stable-Diffusion")
+#magicModel = AutoModelForCausalLM.from_pretrained(
+#    "Gustavosta/MagicPrompt-Stable-Diffusion")
 
 def generate(input):
     # summary
@@ -19,12 +19,12 @@ def generate(input):
                               clean_up_tokenization_spaces=True) for g in generated_ids]
 
     # add prompt magic to the summary
-    magic_input_ids = magicTokenizer.encode(preds[0], return_tensors="pt")
-    gen_tokens = magicModel.generate(
-        input_ids=magic_input_ids,
-        max_new_tokens=55
-    )
+    #magic_input_ids = magicTokenizer.encode(preds[0], return_tensors="pt")
+    #gen_tokens = magicModel.generate(
+    #    input_ids=magic_input_ids,
+    #    max_new_tokens=55
+    #)
 
-    resp = magicTokenizer.decode(gen_tokens[0]).replace("<|endoftext|>", "")
+    #resp = magicTokenizer.decode(gen_tokens[0]).replace("<|endoftext|>", "")
 
-    return resp
+    return preds[0] + " fine art. trending on artstation. masterpiece."

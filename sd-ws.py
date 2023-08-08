@@ -5,6 +5,7 @@ from pynvml.smi import nvidia_smi
 from websockets import connect, exceptions
 
 from sd import generate
+from sdavatar import generateAvatar
 
 nvsmi = nvidia_smi.getInstance()
 cuda_device = int(os.environ.get("CUDA_VISIBLE_DEVICES", "0"))
@@ -50,9 +51,6 @@ async def wss(uri):
 
                 def process():
                     if (msg["type"] == 'ChatImageCreate'):
-                        # 
-                        # input = history + "[human]: " + msg["human"] + "\n[expert]:"
-                        # print(input)
                         input = msg["human"]
                         response = generate(input)
 
@@ -60,6 +58,18 @@ async def wss(uri):
                             "cmd": "pub",
                             "topic": msg["replyTopic"],
                             "type": "ChatImageRobotResponse",
+                            "id": msg["id"],
+                            "robot": response,
+                        }
+
+                        return update
+                    elif (msg["type"] == 'ChatAvatarCreate'):
+                        response = generateAvatar(None)
+
+                        update = {
+                            "cmd": "pub",
+                            "topic": msg["replyTopic"],
+                            "type": "ChatAvatarRobotResponse",
                             "id": msg["id"],
                             "robot": response,
                         }
