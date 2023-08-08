@@ -89,7 +89,7 @@ async def wss(uri):
                         for new_text in streamer:
                             response += new_text
                             asyncio.run(streamToken(msg, new_text.replace("</s>", "")))
-                            
+
                         #print("response: " + json.loads(json.dumps(response)))
 
                         update = {
